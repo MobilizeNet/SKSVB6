@@ -45,7 +45,7 @@ Begin VB.Form frmActionOrderRequest
       Width           =   1575
    End
    Begin VB.CommandButton cmdApprove 
-      Caption         =   "&Create Invoice"
+      Caption         =   "&Create"
       Height          =   375
       Left            =   3480
       TabIndex        =   0
@@ -207,12 +207,12 @@ Begin VB.Form frmActionOrderRequest
          NumPanels       =   1
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   13309
+            Object.Width           =   13785
          EndProperty
       EndProperty
    End
    Begin VB.CommandButton cmdCancel 
-      Caption         =   "&Cancel Order"
+      Caption         =   "&Cancel"
       Height          =   375
       Left            =   4920
       TabIndex        =   1
@@ -272,7 +272,7 @@ Begin VB.Form frmActionOrderRequest
       End
    End
    Begin VB.Label Label13 
-      Caption         =   "Required by date:"
+      Caption         =   "Required"
       Height          =   255
       Left            =   240
       TabIndex        =   36
@@ -280,7 +280,7 @@ Begin VB.Form frmActionOrderRequest
       Width           =   1575
    End
    Begin VB.Label Label2 
-      Caption         =   "Promised by date:"
+      Caption         =   "Promised"
       Height          =   255
       Left            =   3960
       TabIndex        =   35
@@ -288,7 +288,7 @@ Begin VB.Form frmActionOrderRequest
       Width           =   1575
    End
    Begin VB.Label Label7 
-      Caption         =   "Requested by:"
+      Caption         =   "By"
       Height          =   255
       Left            =   120
       TabIndex        =   34
@@ -312,7 +312,7 @@ Begin VB.Form frmActionOrderRequest
       Width           =   855
    End
    Begin VB.Label lblChangedBy 
-      Caption         =   "Changed by:"
+      Caption         =   "By"
       Height          =   255
       Left            =   4800
       TabIndex        =   28
@@ -336,7 +336,7 @@ Begin VB.Form frmActionOrderRequest
       Width           =   1335
    End
    Begin VB.Label Label12 
-      Caption         =   "Freight Charge:"
+      Caption         =   "Freight"
       Height          =   255
       Left            =   120
       TabIndex        =   22
@@ -409,10 +409,17 @@ If UCase(txtStatus) = "APPROVED" Then
 End If
 
 If UCase(txtStatus) = "CANCELLED" Then
-    LogStatus "Order was already approved by " & txtChangedBy & " on " & txtChanged & ", it cannot be approved", Me
+    LogStatus "Order was already cancelled by " & txtChangedBy & " on " & txtChanged & ", it cannot be approved", Me
     Exit Sub
 End If
-Exit Sub
+
+' UPDATE
+ExecuteSql "Update OrderRequests Set Status = 'APPROVED', ChangedBy = '" & UserId & "', ChangedDate = '" & Date & "'" & _
+" Where OrderId = " & OrderId
+
+LoadData
+MsgBox "The order was successfully approved"
+Unload Me
 
 Exit Sub
 HandleError:
@@ -427,7 +434,7 @@ If UCase(txtStatus) = "CANCELLED" Then
     Exit Sub
 End If
 If UCase(txtStatus) = "APPROVED" Then
-    LogStatus "Order was already cancelled by " & txtChangedBy & " on " & txtChanged & ", it cannot be canceled", Me
+    LogStatus "Order was already approved by " & txtChangedBy & " on " & txtChanged & ", it cannot be cancelled", Me
     Exit Sub
 End If
 
@@ -437,7 +444,7 @@ If MsgBox("Do you want to cancel the order request?", vbYesNo + vbQuestion, "Con
 End If
 
 ' UPDATE
-ExecuteSql "Update OrderRequests Set Status = 'CANCELLED', ChangedBy = '" & UserId & "', ChangedDate = #" & Date & "#" & _
+ExecuteSql "Update OrderRequests Set Status = 'CANCELLED', ChangedBy = '" & UserId & "', ChangedDate = '" & Date & "'" & _
 " Where OrderId = " & OrderId
 
 LoadData
@@ -451,14 +458,14 @@ MsgBox "An error has occurred adding the data. Error: (" & err.Number & ") " & e
 End Sub
 
 Private Sub Form_Load()
-'LoadData
+' LoadData
 If Action <> 0 Then
    
     Select Case (Action)
         Case 1:
-            cmdApprove_Click
+           ' cmdApprove_Click
         Case 2:
-            cmdCancel_Click
+           ' cmdCancel_Click
     End Select
 End If
 End Sub
@@ -533,8 +540,7 @@ End Sub
 
 Private Sub LoadDetails()
 
-ExecuteSql "Select d.Quantity, p.ProductID, p.ProductName, d.UnitPrice, d.SalePrice, p.UnitsInStock, p.UnitsOnOrder, Str(p.QuantityPerUnit) + p.Unit, d.LineTotal From Products as p, OrderRequestDetails as d " & _
- "Where d.OrderID = " & OrderId & " And d.ProductId = p.ProductId"
+ExecuteSql "Select d.Quantity, p.ProductID, p.ProductName, d.UnitPrice, d.SalePrice, p.UnitsInStock, p.UnitsOnOrder, cast(p.QuantityPerUnit as text) + p.Unit, d.LineTotal From Products as p, OrderRequestDetails as d " & "Where d.OrderID = " & OrderId & " And d.ProductId = p.ProductId"
 
 Dim lng As Long
 Dim intLoopCount As Integer

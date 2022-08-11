@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmRequestApproval 
    BorderStyle     =   1  'Fixed Single
@@ -16,7 +16,7 @@ Begin VB.Form frmRequestApproval
    ScaleHeight     =   7440
    ScaleWidth      =   7845
    Begin VB.CommandButton cmdApprove 
-      Caption         =   "&Create Invoice"
+      Caption         =   "&Create"
       Height          =   375
       Left            =   3480
       TabIndex        =   10
@@ -24,7 +24,7 @@ Begin VB.Form frmRequestApproval
       Width           =   1335
    End
    Begin VB.CommandButton cmdInfo 
-      Caption         =   "&Information"
+      Caption         =   "&Info"
       Height          =   375
       Left            =   2040
       TabIndex        =   9
@@ -67,7 +67,7 @@ Begin VB.Form frmRequestApproval
       EndProperty
    End
    Begin VB.CommandButton cmdCancel 
-      Caption         =   "&Cancel Order"
+      Caption         =   "&Cancel"
       Height          =   375
       Left            =   4920
       TabIndex        =   11
@@ -170,7 +170,7 @@ Begin VB.Form frmRequestApproval
          _ExtentX        =   2566
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   16646145
+         Format          =   229900289
          CurrentDate     =   41323
       End
       Begin MSComCtl2.DTPicker dtTo 
@@ -182,11 +182,11 @@ Begin VB.Form frmRequestApproval
          _ExtentX        =   2566
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   16646145
+         Format          =   229900289
          CurrentDate     =   41323
       End
       Begin VB.Label Label5 
-         Caption         =   "Status:"
+         Caption         =   "Status"
          Height          =   255
          Left            =   4320
          TabIndex        =   24
@@ -194,15 +194,15 @@ Begin VB.Form frmRequestApproval
          Width           =   615
       End
       Begin VB.Label Label8 
-         Caption         =   "Product code:"
+         Caption         =   "Product"
          Height          =   255
          Left            =   3840
          TabIndex        =   21
          Top             =   1680
-         Width           =   1335
+         Width           =   1095
       End
       Begin VB.Label Label1 
-         Caption         =   "Order number:"
+         Caption         =   "Order"
          Height          =   255
          Left            =   120
          TabIndex        =   20
@@ -218,15 +218,15 @@ Begin VB.Form frmRequestApproval
          Width           =   975
       End
       Begin VB.Label Label3 
-         Caption         =   "Contact last name:"
+         Caption         =   "Last Name"
          Height          =   255
-         Left            =   3600
+         Left            =   3840
          TabIndex        =   17
          Top             =   720
-         Width           =   1455
+         Width           =   975
       End
       Begin VB.Label Label4 
-         Caption         =   "Company name:"
+         Caption         =   "Company"
          Height          =   255
          Left            =   120
          TabIndex        =   16
@@ -234,7 +234,7 @@ Begin VB.Form frmRequestApproval
          Width           =   1335
       End
       Begin VB.Label Label2 
-         Caption         =   "Contact name:"
+         Caption         =   "First Name"
          Height          =   255
          Left            =   120
          TabIndex        =   15
@@ -276,7 +276,7 @@ If fgOrders.Row > 0 Then
         .OrderId = OrderId
         .Action = Action
         .LoadData
-        .Show 'vbModal
+        .Show
     End With
 End If
 End Sub
@@ -365,15 +365,15 @@ If txtProductID <> Empty Then
 End If
 If chkFrom.value = 1 Then
     AppendAND filter
-    filter = filter & "o.OrderDate >= #" & Format(dtFrom.value, "mm/dd/yyyy") & "#"
+    filter = filter & "o.OrderDate >= '" & Format(dtFrom.value, "mm/dd/yyyy") & "'"
 End If
 If chkTo.value = 1 Then
     AppendAND filter
-    filter = filter & "o.OrderDate <= #" & Format(dtTo.value, "mm/dd/yyyy") & "#"
+    filter = filter & "o.OrderDate <= '" & Format(dtTo.value, "mm/dd/yyyy") & "'"
 End If
 If cmbStatus.ListIndex <> -1 And cmbStatus.text <> "All" Then
     AppendAND filter
-    filter = filter & "o.Status = '" & cmbStatus.text & "'"
+    filter = filter & "o.Status = UPPER('" & cmbStatus.text & "')"
 End If
 
 Dim where As String

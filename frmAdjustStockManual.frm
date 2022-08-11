@@ -114,7 +114,6 @@ Begin VB.Form frmAdjustStockManual
       Width           =   1215
    End
    Begin VB.Frame Frame3 
-      Caption         =   "Stocks for the product "
       Height          =   2055
       Left            =   120
       TabIndex        =   13
@@ -219,7 +218,7 @@ Begin VB.Form frmAdjustStockManual
          Width           =   375
       End
       Begin VB.Label Label5 
-         Caption         =   "Product code:"
+         Caption         =   "Code"
          Height          =   255
          Left            =   240
          TabIndex        =   12
@@ -227,7 +226,7 @@ Begin VB.Form frmAdjustStockManual
          Width           =   1335
       End
       Begin VB.Label Label4 
-         Caption         =   "Product name:"
+         Caption         =   "Name"
          Height          =   255
          Left            =   240
          TabIndex        =   11
@@ -350,15 +349,15 @@ Begin VB.Form frmAdjustStockManual
       Width           =   975
    End
    Begin VB.Label Label10 
-      Caption         =   "Quantity per Unit"
+      Caption         =   "Quantity"
       Height          =   255
-      Left            =   3480
+      Left            =   3240
       TabIndex        =   24
       Top             =   5640
-      Width           =   1335
+      Width           =   1095
    End
    Begin VB.Label Label8 
-      Caption         =   "Product name:"
+      Caption         =   "Product"
       Height          =   255
       Left            =   240
       TabIndex        =   23
@@ -368,13 +367,13 @@ Begin VB.Form frmAdjustStockManual
    Begin VB.Label Label9 
       Caption         =   "Unit"
       Height          =   255
-      Left            =   4440
+      Left            =   4080
       TabIndex        =   22
       Top             =   5160
-      Width           =   375
+      Width           =   615
    End
    Begin VB.Label Label7 
-      Caption         =   "Adjusted &Quantity"
+      Caption         =   "New Quantity"
       Height          =   255
       Left            =   3240
       TabIndex        =   18
@@ -382,7 +381,7 @@ Begin VB.Form frmAdjustStockManual
       Width           =   1335
    End
    Begin VB.Label Label6 
-      Caption         =   "Adjusted &Price"
+      Caption         =   "New Price"
       Height          =   255
       Left            =   3240
       TabIndex        =   17
@@ -390,7 +389,7 @@ Begin VB.Form frmAdjustStockManual
       Width           =   1095
    End
    Begin VB.Label Label2 
-      Caption         =   "Original Quantity"
+      Caption         =   "Quantity"
       Height          =   255
       Left            =   240
       TabIndex        =   16
@@ -398,7 +397,7 @@ Begin VB.Form frmAdjustStockManual
       Width           =   1215
    End
    Begin VB.Label Label1 
-      Caption         =   "Original Price"
+      Caption         =   "Old Price"
       Height          =   255
       Left            =   240
       TabIndex        =   15
@@ -472,7 +471,8 @@ rs("User") = UserId
 rs("Date") = CStr(Date)
 rs("Action") = "MOD"
 rs.Update
-newManualLogId = rs("ManualID")
+ExecuteSql "SELECT last_insert_rowid()"
+newManualLogId = rs(0)
 
 'NEW
 ExecuteSql "Select * from StockLog"
@@ -486,7 +486,8 @@ rs("StockID") = currentIdStock
 rs("DocType") = "MANUAL"
 rs("DocID") = newManualLogId
 rs.Update
-newStockLogId = rs("ID")
+ExecuteSql "SELECT last_insert_rowid()"
+newStockLogId = rs(0)
 
 ExecuteSql "Update Products Set UnitsInStock = UnitsInStock + " & deltaStock & _
 " Where ProductId = '& currentIdProduct &'"

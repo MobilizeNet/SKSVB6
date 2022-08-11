@@ -1,6 +1,5 @@
 VERSION 5.00
 Begin VB.Form frmSearch 
-   BorderStyle     =   1  'Fixed Single
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Search"
    ClientHeight    =   2595
@@ -145,7 +144,7 @@ Attribute VB_Exposed = False
 Option Explicit
 Dim SearchTable As String
 Private Sub cboSrchBy_Click()
-    lblSrchBy.Caption = cboSrchBy.Text
+    lblSrchBy.Caption = cboSrchBy.text
 End Sub
 
 Private Sub cmdClose_Click()
@@ -158,7 +157,7 @@ If itemToSearch <> Empty Then
     Label20.Caption = "Search for a " & itemToSearch
 End If
 SearchTable = Table
-ExecuteSql "Select Top 1 * from " & Table
+ExecuteSql "Select * from " & Table & " limit 1;"
 For i = 0 To (rs.Fields.Count - 1)
     cboSrchBy.AddItem (rs.Fields(i).Name)
 Next i
@@ -166,13 +165,13 @@ cboSrchBy = fieldToSearch
 End Sub
 
 Private Sub cmdSearch_Click()
-If Right(txtSrchStr.Text, 1) = "'" Then
-    txtSrchStr.Text = Empty
+If Right(txtSrchStr.text, 1) = "'" Then
+    txtSrchStr.text = Empty
 End If
 Dim txtToSearch As String
 
-If Trim(txtSrchStr.Text) <> Empty Then
-    txtToSearch = txtSrchStr.Text
+If Trim(txtSrchStr.text) <> Empty Then
+    txtToSearch = txtSrchStr.text
 Else
     txtToSearch = "%"
 End If

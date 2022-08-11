@@ -43,7 +43,7 @@ Begin VB.Form frmAddStockManual
          NumPanels       =   1
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   10689
+            Object.Width           =   11165
          EndProperty
       EndProperty
    End
@@ -166,7 +166,7 @@ Begin VB.Form frmAddStockManual
          Width           =   1455
       End
       Begin VB.Label Label4 
-         Caption         =   "Product name:"
+         Caption         =   "Name "
          Height          =   255
          Left            =   240
          TabIndex        =   9
@@ -174,7 +174,7 @@ Begin VB.Form frmAddStockManual
          Width           =   1335
       End
       Begin VB.Label Label5 
-         Caption         =   "Product code:"
+         Caption         =   "Code"
          Height          =   255
          Left            =   240
          TabIndex        =   8
@@ -233,7 +233,7 @@ Begin VB.Form frmAddStockManual
       BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1
          SubItemIndex    =   5
-         Text            =   "Quantity per Unit"
+         Text            =   "Qty per Unit"
          Object.Width           =   2540
       EndProperty
       BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
@@ -255,7 +255,7 @@ Begin VB.Form frmAddStockManual
       Left            =   120
       TabIndex        =   21
       Top             =   5445
-      Width           =   1335
+      Width           =   1095
    End
    Begin VB.Label Label9 
       Caption         =   "Unit"
@@ -266,15 +266,15 @@ Begin VB.Form frmAddStockManual
       Width           =   375
    End
    Begin VB.Label Label8 
-      Caption         =   "Product name:"
+      Caption         =   "Product"
       Height          =   255
       Left            =   120
       TabIndex        =   17
       Top             =   3960
-      Width           =   1335
+      Width           =   1100
    End
    Begin VB.Label Label7 
-      Caption         =   "Quantity per Unit"
+      Caption         =   "Units"
       Height          =   255
       Left            =   3360
       TabIndex        =   14
@@ -290,7 +290,7 @@ Begin VB.Form frmAddStockManual
       Width           =   1095
    End
    Begin VB.Label Label1 
-      Caption         =   "Stock Price"
+      Caption         =   "Price"
       Height          =   255
       Left            =   120
       TabIndex        =   12
@@ -303,7 +303,7 @@ Begin VB.Form frmAddStockManual
       Left            =   120
       TabIndex        =   11
       Top             =   4485
-      Width           =   1215
+      Width           =   1100
    End
    Begin VB.Label Label3 
       Caption         =   "Select a product first"
@@ -359,7 +359,8 @@ rs("User") = UserId
 rs("UnitPrice") = txtValues(2)
 rs("StockPrice") = txtValues(1)
 rs.Update
-newStockId = rs("StockID")
+ExecuteSql "SELECT last_insert_rowid()"
+newStockId = rs(0)
 
 ExecuteSql "Select * from ManualStocks"
 rs.AddNew
@@ -370,7 +371,8 @@ rs("User") = UserId
 rs("Date") = CStr(Date)
 rs("Action") = "ADD"
 rs.Update
-newManualLogId = rs("ManualID")
+ExecuteSql "SELECT last_insert_rowid()"
+newManualLogId = rs(0)
 
 ExecuteSql "Select * from StockLog"
 rs.AddNew
@@ -383,7 +385,8 @@ rs("StockID") = newStockId
 rs("DocType") = "MANUAL"
 rs("DocID") = newManualLogId
 rs.Update
-newStockLogId = rs("ID")
+ExecuteSql "SELECT last_insert_rowid()"
+newStockLogId = rs(0)
 
 ExecuteSql "Update Products Set UnitsInStock = UnitsInStock + " & txtValues(0) & _
 " Where ProductId = '& currentIdProduct &'"

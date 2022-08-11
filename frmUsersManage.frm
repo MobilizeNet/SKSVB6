@@ -6,13 +6,13 @@ Begin VB.Form frmUsersManage
    ClientHeight    =   6210
    ClientLeft      =   4905
    ClientTop       =   2160
-   ClientWidth     =   5175
+   ClientWidth     =   5115
    Icon            =   "frmUsersManage.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    ScaleHeight     =   6210
-   ScaleWidth      =   5175
+   ScaleWidth      =   5115
    Begin MSComctlLib.ListView lstAccounts 
       Height          =   1695
       Left            =   0
@@ -170,7 +170,7 @@ Begin VB.Form frmUsersManage
          Index           =   0
          Left            =   240
          TabIndex        =   14
-         Top             =   360
+         Top             =   480
          Width           =   1050
       End
       Begin VB.Label Label1 
@@ -342,7 +342,7 @@ If MsgBox("Are you sure you want to delete the user '" & lstAccounts.SelectedIte
         MsgBox "You cannot delete the last user", vbCritical, "Delete error"
         Exit Sub
     End If
-    ExecuteSql "delete * from Users where Username = '" & lstAccounts.SelectedItem & "'"
+    ExecuteSql "Delete From Users Where Username = '" & lstAccounts.SelectedItem & "'"
     LoadUsers
 End If
 End Sub

@@ -20,7 +20,3 @@ Set rs2 = New ADODB.Recordset
 rs2.Open Statement, CurrentConnection, adOpenKeyset, adLockPessimistic
 End Sub
 
-
-
-
-

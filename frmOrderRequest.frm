@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmOrderRequest 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Create Order"
@@ -113,7 +113,7 @@ Begin VB.Form frmOrderRequest
       _ExtentX        =   2566
       _ExtentY        =   529
       _Version        =   393216
-      Format          =   122683393
+      Format          =   228196353
       CurrentDate     =   41323
    End
    Begin VB.CommandButton cmdSave 
@@ -312,7 +312,7 @@ Begin VB.Form frmOrderRequest
       _ExtentX        =   2566
       _ExtentY        =   529
       _Version        =   393216
-      Format          =   122683393
+      Format          =   228524033
       CurrentDate     =   41323
    End
    Begin VB.Label Label13 
@@ -487,14 +487,17 @@ ExecuteSql "Select * from OrderRequests"
 rs.AddNew
 rs("CustomerId") = currentIdCustomer
 rs("EmployeeId") = UserId
-rs("OrderDate") = CStr(Date)
-rs("RequiredByDate") = CStr(dtRequired.value)
-rs("PromisedByDate") = CStr(dtPromised.value)
+rs("OrderDate") = Format(CStr(Date), "mm/dd/yyyy")
+rs("RequiredByDate") = Format(CStr(dtRequired.value), "mm/dd/yyyy")
+rs("PromisedByDate") = Format(CStr(dtPromised.value), "mm/dd/yyyy")
 rs("FreightCharge") = currentFreightCharge
 rs("SalesTaxRate") = currentTax * 0.01
 rs("Status") = "REQUESTED"
 rs.Update
-newOrderId = rs("OrderID")
+
+ExecuteSql "SELECT last_insert_rowid() "
+
+newOrderId = rs(0)
 
 
 For i = 1 To fgProducts.Rows - 1

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "msadodc.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmProducts 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Products"
@@ -70,16 +70,6 @@ Begin VB.Form frmProducts
          Top             =   3600
          Width           =   1575
       End
-      Begin VB.TextBox txtCategory 
-         DataField       =   "CategoryID"
-         DataSource      =   "dcProducts"
-         Height          =   285
-         Left            =   3960
-         TabIndex        =   16
-         TabStop         =   0   'False
-         Top             =   1800
-         Width           =   1695
-      End
       Begin VB.ComboBox cmbCategory 
          Height          =   315
          Left            =   1560
@@ -148,16 +138,26 @@ Begin VB.Form frmProducts
          Top             =   2715
          Width           =   375
       End
+      Begin VB.TextBox txtCategory 
+         DataField       =   "CategoryID"
+         DataSource      =   "dcProducts"
+         Height          =   195
+         Left            =   3000
+         TabIndex        =   16
+         TabStop         =   0   'False
+         Top             =   1800
+         Width           =   150
+      End
       Begin VB.Label Label7 
-         Caption         =   "Unit:"
+         Caption         =   "Unit"
          Height          =   255
          Left            =   3240
          TabIndex        =   19
-         Top             =   3600
+         Top             =   3650
          Width           =   855
       End
       Begin VB.Label Label3 
-         Caption         =   "Product Code:"
+         Caption         =   "Product "
          Height          =   255
          Left            =   240
          TabIndex        =   18
@@ -165,15 +165,15 @@ Begin VB.Form frmProducts
          Width           =   1335
       End
       Begin VB.Label Label2 
-         Caption         =   "Quantity per unit:"
+         Caption         =   "Qty per unit"
          Height          =   255
          Left            =   240
          TabIndex        =   17
-         Top             =   3600
+         Top             =   3650
          Width           =   1215
       End
       Begin VB.Label Label1 
-         Caption         =   "Product Name:"
+         Caption         =   "Name"
          Height          =   255
          Left            =   240
          TabIndex        =   15
@@ -181,7 +181,7 @@ Begin VB.Form frmProducts
          Width           =   1335
       End
       Begin VB.Label Label4 
-         Caption         =   "Description:"
+         Caption         =   "Desc"
          Height          =   255
          Left            =   240
          TabIndex        =   14
@@ -189,7 +189,7 @@ Begin VB.Form frmProducts
          Width           =   1335
       End
       Begin VB.Label Label5 
-         Caption         =   "Serial number:"
+         Caption         =   "Serial number"
          Height          =   255
          Left            =   240
          TabIndex        =   13
@@ -197,7 +197,7 @@ Begin VB.Form frmProducts
          Width           =   1335
       End
       Begin VB.Label Label6 
-         Caption         =   "Unit price:"
+         Caption         =   "Unit price"
          Height          =   255
          Left            =   240
          TabIndex        =   12
@@ -205,7 +205,7 @@ Begin VB.Form frmProducts
          Width           =   1215
       End
       Begin VB.Label Label11 
-         Caption         =   "Category:"
+         Caption         =   "Category"
          Height          =   255
          Left            =   240
          TabIndex        =   11
@@ -213,7 +213,7 @@ Begin VB.Form frmProducts
          Width           =   1335
       End
       Begin VB.Label Label15 
-         Caption         =   "Discontinued:"
+         Caption         =   "Discontinued"
          Height          =   255
          Left            =   240
          TabIndex        =   10
@@ -233,9 +233,9 @@ Begin VB.Form frmProducts
       IsolationLevel  =   -1
       ConnectionTimeout=   15
       CommandTimeout  =   30
-      CursorType      =   2
-      LockType        =   2
-      CommandType     =   2
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   1
       CursorOptions   =   0
       CacheSize       =   50
       MaxRecords      =   0
@@ -247,14 +247,14 @@ Begin VB.Form frmProducts
       ForeColor       =   -2147483640
       Orientation     =   0
       Enabled         =   -1
-      Connect         =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
-      OLEDBString     =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
+      Connect         =   "Driver=SQLite3 ODBC Driver; Database=Orders.db"
+      OLEDBString     =   "Driver=SQLite3 ODBC Driver; Database=Orders.db"
       OLEDBFile       =   ""
       DataSourceName  =   ""
       OtherAttributes =   ""
       UserName        =   ""
       Password        =   ""
-      RecordSource    =   "Products"
+      RecordSource    =   "Select * from Products"
       Caption         =   "Products"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -278,7 +278,7 @@ Begin VB.Form frmProducts
       MaskColor       =   16777215
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   5
+         NumListImages   =   6
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmProducts.frx":0000
             Key             =   ""
@@ -299,19 +299,23 @@ Begin VB.Form frmProducts
             Picture         =   "frmProducts.frx":0D48
             Key             =   ""
          EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmProducts.frx":109A
+            Key             =   ""
+         EndProperty
       EndProperty
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   630
+      Height          =   660
       Left            =   0
       TabIndex        =   8
       Top             =   0
       Width           =   6720
       _ExtentX        =   11853
-      _ExtentY        =   1111
-      ButtonWidth     =   1058
-      ButtonHeight    =   953
+      _ExtentY        =   1164
+      ButtonWidth     =   1138
+      ButtonHeight    =   1005
       Appearance      =   1
       ImageList       =   "ImageList1"
       _Version        =   393216
@@ -345,6 +349,7 @@ Begin VB.Form frmProducts
          BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "Cancel"
             Object.ToolTipText     =   "Cancel edited changes"
+            ImageIndex      =   6
          EndProperty
       EndProperty
    End
@@ -371,6 +376,7 @@ End If
 txtCategory = cmbCategory.ItemData(cmbCategory.ListIndex)
 End Sub
 
+
 Private Sub Form_Unload(Cancel As Integer)
 CurrentProductID = dcProducts.Recordset.Fields("ProductId")
 End Sub
@@ -395,7 +401,8 @@ cmbCategory.ListIndex = i
 End Sub
 
 Private Sub Form_Load()
-txtCategory.Visible = False
+txtCategory.Height = 0
+txtCategory.Width = 0
 dcProducts.ConnectionString = ConnectionString
 NewMode = False
 EditMode = False
@@ -415,6 +422,7 @@ NewMode = True
 dcProducts.Recordset.AddNew
 dcProducts.Recordset("UnitsInStock") = 0
 dcProducts.Recordset("UnitsOnOrder") = 0
+dcProducts.Recordset("Discontinued") = 0
 Case "Edit"
 'Edit mode
 EditMode = True
@@ -422,6 +430,7 @@ EditMode = True
 Case "Save"
 'Save data
 dcProducts.Recordset.Update
+dcProducts.Recordset.Requery ' SQLite ODBC driver needs to requery the info
 EditMode = False
 NewMode = False
 Case "Delete"

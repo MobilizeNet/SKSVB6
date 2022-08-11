@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmOrderReception 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Add Stock Order"
-   ClientHeight    =   10545
+   ClientHeight    =   9720
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   7815
@@ -12,14 +12,14 @@ Begin VB.Form frmOrderReception
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   10545
+   ScaleHeight     =   9720
    ScaleWidth      =   7815
    Begin VB.TextBox txtNotes 
       Height          =   660
       Left            =   840
       MultiLine       =   -1  'True
       TabIndex        =   4
-      Top             =   4800
+      Top             =   3600
       Width           =   6375
    End
    Begin VB.TextBox txtSubTotal 
@@ -28,20 +28,20 @@ Begin VB.Form frmOrderReception
       Height          =   300
       Left            =   5280
       Locked          =   -1  'True
-      TabIndex        =   30
+      TabIndex        =   31
       TabStop         =   0   'False
-      Top             =   9000
+      Top             =   8040
       Width           =   2175
    End
    Begin VB.TextBox txtTotal 
       Alignment       =   1  'Right Justify
       BackColor       =   &H80000004&
       Height          =   300
-      Left            =   1440
+      Left            =   1320
       Locked          =   -1  'True
-      TabIndex        =   28
+      TabIndex        =   29
       TabStop         =   0   'False
-      Top             =   9360
+      Top             =   8400
       Width           =   2175
    End
    Begin VB.TextBox txtTotalTax 
@@ -50,43 +50,43 @@ Begin VB.Form frmOrderReception
       Height          =   300
       Left            =   5280
       Locked          =   -1  'True
-      TabIndex        =   26
+      TabIndex        =   27
       TabStop         =   0   'False
-      Top             =   8640
+      Top             =   7680
       Width           =   2175
    End
    Begin VB.TextBox txtFreightCharge 
       Alignment       =   1  'Right Justify
       Height          =   300
-      Left            =   1440
+      Left            =   1320
       TabIndex        =   7
-      Top             =   9000
+      Top             =   8040
       Width           =   2175
    End
    Begin VB.TextBox txtSalesTax 
       Alignment       =   1  'Right Justify
       Height          =   300
-      Left            =   1440
+      Left            =   1320
       TabIndex        =   6
-      Top             =   8640
+      Top             =   7680
       Width           =   2175
    End
    Begin VB.TextBox txtEntry 
       Height          =   285
-      Left            =   1440
-      TabIndex        =   23
-      Top             =   8280
+      Left            =   1320
+      TabIndex        =   24
+      Top             =   7320
       Visible         =   0   'False
       Width           =   2175
    End
    Begin MSFlexGridLib.MSFlexGrid fgProducts 
-      Height          =   2535
+      Height          =   2655
       Left            =   120
       TabIndex        =   5
-      Top             =   5640
+      Top             =   4320
       Width           =   7575
       _ExtentX        =   13361
-      _ExtentY        =   4471
+      _ExtentY        =   4683
       _Version        =   393216
       Cols            =   0
       FixedRows       =   0
@@ -97,8 +97,8 @@ Begin VB.Form frmOrderReception
       Align           =   2  'Align Bottom
       Height          =   375
       Left            =   0
-      TabIndex        =   22
-      Top             =   10170
+      TabIndex        =   23
+      Top             =   9345
       Width           =   7815
       _ExtentX        =   13785
       _ExtentY        =   661
@@ -116,7 +116,7 @@ Begin VB.Form frmOrderReception
       Height          =   375
       Left            =   4800
       TabIndex        =   8
-      Top             =   9720
+      Top             =   8760
       Width           =   1335
    End
    Begin VB.CommandButton cmdClose 
@@ -124,23 +124,23 @@ Begin VB.Form frmOrderReception
       Height          =   375
       Left            =   6360
       TabIndex        =   9
-      Top             =   9720
+      Top             =   8760
       Width           =   1335
    End
    Begin VB.CommandButton cmdAddProducts 
       Caption         =   "..."
       Height          =   315
       Left            =   7320
-      TabIndex        =   20
+      TabIndex        =   21
       TabStop         =   0   'False
-      Top             =   5160
+      Top             =   3960
       Width           =   375
    End
    Begin VB.Frame Frame1 
       Caption         =   "Search supplier"
-      Height          =   3735
+      Height          =   2535
       Left            =   120
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   120
       Width           =   7575
       Begin VB.TextBox txtProviderName 
@@ -168,19 +168,19 @@ Begin VB.Form frmOrderReception
          Caption         =   "..."
          Height          =   315
          Left            =   6840
-         TabIndex        =   12
+         TabIndex        =   13
          TabStop         =   0   'False
          Top             =   240
          Width           =   375
       End
       Begin MSComctlLib.ListView lvProviders 
-         Height          =   2415
+         Height          =   1215
          Left            =   120
          TabIndex        =   3
          Top             =   1200
          Width           =   7335
          _ExtentX        =   12938
-         _ExtentY        =   4260
+         _ExtentY        =   2143
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -230,26 +230,26 @@ Begin VB.Form frmOrderReception
          EndProperty
       End
       Begin VB.Label Label3 
-         Caption         =   "Contact last name:"
+         Caption         =   "Last name"
          Height          =   255
          Left            =   3600
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   720
          Width           =   1455
       End
       Begin VB.Label Label4 
-         Caption         =   "Supplier Name:"
+         Caption         =   "Supplier"
          Height          =   255
          Left            =   120
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   240
          Width           =   1335
       End
       Begin VB.Label Label2 
-         Caption         =   "Contact name:"
+         Caption         =   "First Name"
          Height          =   255
          Left            =   120
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   720
          Width           =   1335
       End
@@ -258,15 +258,15 @@ Begin VB.Form frmOrderReception
       Caption         =   "Supplier"
       Height          =   735
       Left            =   120
-      TabIndex        =   10
-      Top             =   3960
+      TabIndex        =   11
+      Top             =   2760
       Width           =   7575
       Begin VB.TextBox txtProviderContact 
          BackColor       =   &H80000004&
          Height          =   300
          Left            =   4320
          Locked          =   -1  'True
-         TabIndex        =   19
+         TabIndex        =   20
          TabStop         =   0   'False
          Top             =   240
          Width           =   3135
@@ -276,7 +276,7 @@ Begin VB.Form frmOrderReception
          Height          =   300
          Left            =   1080
          Locked          =   -1  'True
-         TabIndex        =   18
+         TabIndex        =   19
          TabStop         =   0   'False
          Top             =   240
          Width           =   2175
@@ -285,7 +285,7 @@ Begin VB.Form frmOrderReception
          Caption         =   "Name:"
          Height          =   255
          Left            =   120
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   240
          Width           =   855
       End
@@ -293,65 +293,65 @@ Begin VB.Form frmOrderReception
          Caption         =   "Contact:"
          Height          =   255
          Left            =   3480
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   240
          Width           =   855
       End
    End
    Begin VB.Label Label7 
-      Caption         =   "Line quantity:"
+      Caption         =   "Quantity"
       Height          =   255
       Left            =   120
-      TabIndex        =   32
-      Top             =   8280
+      TabIndex        =   10
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.Label Label12 
-      Caption         =   "Freight Charge:"
+      Caption         =   "Freight"
       Height          =   255
       Left            =   120
-      TabIndex        =   31
-      Top             =   9000
+      TabIndex        =   32
+      Top             =   8040
       Width           =   1335
    End
    Begin VB.Label Label11 
-      Caption         =   "Total:"
+      Caption         =   "Total"
       Height          =   255
       Left            =   120
-      TabIndex        =   29
-      Top             =   9360
+      TabIndex        =   30
+      Top             =   8400
       Width           =   1335
    End
    Begin VB.Label Label10 
-      Caption         =   "Total Tax:"
+      Caption         =   "Total Tax"
       Height          =   255
       Left            =   4080
-      TabIndex        =   27
-      Top             =   8640
+      TabIndex        =   28
+      Top             =   7680
       Width           =   1335
    End
    Begin VB.Label Label9 
-      Caption         =   "Sub Total:"
+      Caption         =   "Sub Total"
       Height          =   255
       Left            =   4080
-      TabIndex        =   25
-      Top             =   9000
+      TabIndex        =   26
+      Top             =   8040
       Width           =   1335
    End
    Begin VB.Label Label8 
-      Caption         =   "Sales Tax:"
+      Caption         =   "Sales Tax"
       Height          =   255
       Left            =   120
-      TabIndex        =   24
-      Top             =   8640
+      TabIndex        =   25
+      Top             =   7680
       Width           =   1335
    End
    Begin VB.Label Label6 
       Caption         =   "Notes:"
       Height          =   255
       Left            =   120
-      TabIndex        =   21
-      Top             =   4920
+      TabIndex        =   22
+      Top             =   3720
       Width           =   495
    End
 End
@@ -463,8 +463,9 @@ rs("FreightCharge") = currentFreightCharge
 rs("SalesTaxRate") = currentTax * 0.01
 rs("Status") = "RECEIVED"
 rs.Update
-newOrderId = rs("OrderID")
 
+ExecuteSql "SELECT last_insert_rowid() "
+newOrderId = rs(0)
 
 For i = 1 To fgProducts.Rows - 1
     If fgProducts.TextMatrix(i, 0) <> "0" Then

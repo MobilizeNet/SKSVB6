@@ -23,13 +23,13 @@ Begin VB.Form frmCustomers
       IsolationLevel  =   -1
       ConnectionTimeout=   15
       CommandTimeout  =   30
-      CursorType      =   3
-      LockType        =   3
-      CommandType     =   2
+      CursorType      =   1
+      LockType        =   2
+      CommandType     =   1
       CursorOptions   =   0
       CacheSize       =   50
       MaxRecords      =   0
-      BOFAction       =   0
+      BOFAction       =   1
       EOFAction       =   0
       ConnectStringType=   1
       Appearance      =   1
@@ -37,14 +37,14 @@ Begin VB.Form frmCustomers
       ForeColor       =   -2147483640
       Orientation     =   0
       Enabled         =   -1
-      Connect         =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
-      OLEDBString     =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
+      Connect         =   "Driver=SQLite3 ODBC Driver; Database=Orders.db;"
+      OLEDBString     =   "Driver=SQLite3 ODBC Driver; Database=Orders.db;"
       OLEDBFile       =   ""
       DataSourceName  =   ""
       OtherAttributes =   ""
       UserName        =   ""
       Password        =   ""
-      RecordSource    =   "Customers"
+      RecordSource    =   "Select * from Customers;"
       Caption         =   "Customers"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -182,7 +182,7 @@ Begin VB.Form frmCustomers
             Width           =   1815
          End
          Begin VB.Label Label7 
-            Caption         =   "Title:"
+            Caption         =   "Title"
             Height          =   255
             Left            =   120
             TabIndex        =   31
@@ -190,7 +190,7 @@ Begin VB.Form frmCustomers
             Width           =   735
          End
          Begin VB.Label Label3 
-            Caption         =   "Last name:"
+            Caption         =   "Last name"
             Height          =   255
             Left            =   120
             TabIndex        =   30
@@ -198,7 +198,7 @@ Begin VB.Form frmCustomers
             Width           =   855
          End
          Begin VB.Label Label2 
-            Caption         =   "First name:"
+            Caption         =   "First name"
             Height          =   255
             Left            =   120
             TabIndex        =   29
@@ -248,7 +248,7 @@ Begin VB.Form frmCustomers
          Width           =   1575
       End
       Begin VB.Label Label15 
-         Caption         =   "Zip code:"
+         Caption         =   "Zip"
          Height          =   255
          Left            =   240
          TabIndex        =   32
@@ -256,7 +256,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label14 
-         Caption         =   "Country/Region"
+         Caption         =   "Country"
          Height          =   255
          Left            =   240
          TabIndex        =   27
@@ -264,7 +264,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label13 
-         Caption         =   "State or province:"
+         Caption         =   "State/Prov"
          Height          =   255
          Left            =   240
          TabIndex        =   26
@@ -280,7 +280,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label11 
-         Caption         =   "Email:"
+         Caption         =   "Email"
          Height          =   255
          Left            =   240
          TabIndex        =   24
@@ -288,7 +288,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label10 
-         Caption         =   "Fax number:"
+         Caption         =   "Fax"
          Height          =   255
          Left            =   3480
          TabIndex        =   23
@@ -296,7 +296,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label9 
-         Caption         =   "Extension:"
+         Caption         =   "Ext"
          Height          =   255
          Left            =   3480
          TabIndex        =   22
@@ -304,7 +304,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label8 
-         Caption         =   "Phone number:"
+         Caption         =   "Phone"
          Height          =   255
          Left            =   3480
          TabIndex        =   21
@@ -312,7 +312,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label6 
-         Caption         =   "City:"
+         Caption         =   "City"
          Height          =   255
          Left            =   240
          TabIndex        =   20
@@ -320,7 +320,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label5 
-         Caption         =   "Billing address:"
+         Caption         =   "Address"
          Height          =   255
          Left            =   240
          TabIndex        =   19
@@ -328,7 +328,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label4 
-         Caption         =   "Department:"
+         Caption         =   "Department"
          Height          =   255
          Left            =   240
          TabIndex        =   18
@@ -336,7 +336,7 @@ Begin VB.Form frmCustomers
          Width           =   1335
       End
       Begin VB.Label Label1 
-         Caption         =   "Company Name:"
+         Caption         =   "Company"
          Height          =   255
          Left            =   240
          TabIndex        =   17
@@ -355,7 +355,7 @@ Begin VB.Form frmCustomers
       MaskColor       =   16777215
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   5
+         NumListImages   =   6
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmCustomers.frx":0000
             Key             =   ""
@@ -374,6 +374,10 @@ Begin VB.Form frmCustomers
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmCustomers.frx":0D48
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmCustomers.frx":109A
             Key             =   ""
          EndProperty
       EndProperty
@@ -422,6 +426,7 @@ Begin VB.Form frmCustomers
          BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "Cancel"
             Object.ToolTipText     =   "Cancel edited changes"
+            ImageIndex      =   6
          EndProperty
       EndProperty
    End
@@ -437,6 +442,8 @@ Private NewMode As Boolean
 Private EditMode As Boolean
 Private CancellingMode As Boolean
 Public CurrentCustomerID As String
+
+
 
 Private Sub Form_Unload(Cancel As Integer)
     CurrentCustomerID = dcCustomers.Recordset.Fields("CustomerId")
@@ -466,6 +473,7 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim x As Variant
+Dim newCustomerId As Integer
     Select Case Button.Caption
     Case "Add"
         'Add new record
@@ -477,6 +485,7 @@ Dim x As Variant
     Case "Save"
         'Save data
         dcCustomers.Recordset.Update
+        dcCustomers.Recordset.Requery ' SQLite ODBC driver needs to requery the info
         EditMode = False
         NewMode = False
     Case "Delete"

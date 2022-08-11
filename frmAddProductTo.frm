@@ -22,7 +22,7 @@ Begin VB.Form frmAddProductTo
       Width           =   1215
    End
    Begin VB.CommandButton cmdRemove 
-      Caption         =   "&Remove Checked"
+      Caption         =   "&Remove "
       Height          =   375
       Left            =   120
       TabIndex        =   12
@@ -145,7 +145,7 @@ Begin VB.Form frmAddProductTo
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   5
-            Text            =   "Quantity per Unit"
+            Text            =   "Qty per Unit"
             Object.Width           =   2540
          EndProperty
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
@@ -155,7 +155,7 @@ Begin VB.Form frmAddProductTo
          EndProperty
       End
       Begin VB.Label Label4 
-         Caption         =   "Product name:"
+         Caption         =   "Name"
          Height          =   255
          Left            =   240
          TabIndex        =   9
@@ -163,7 +163,7 @@ Begin VB.Form frmAddProductTo
          Width           =   1335
       End
       Begin VB.Label Label5 
-         Caption         =   "Product code:"
+         Caption         =   "Code"
          Height          =   255
          Left            =   240
          TabIndex        =   8

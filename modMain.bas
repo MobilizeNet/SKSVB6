@@ -12,12 +12,8 @@ Global n As Double, i As Long, s As String, d As Date
 Public msg As String
 Public ImgName As String, ImgSrc As String
 
-
-
-
-
 Public Sub Main()
-    ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
+    ConnectionString = "DRIVER=SQLite3 ODBC Driver; Database=Orders.db; LongNames=0; Timeout=1000; NoTXN=0; SyncPragma=NORMAL; StepAPI=0;"
 
     OpenConnection
     CurrentUserAdmin = True

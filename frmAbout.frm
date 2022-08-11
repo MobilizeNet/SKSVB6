@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form frmAbout 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "About SKS Sales agent"
+   Caption         =   "About Salmon King Seafood"
    ClientHeight    =   3555
    ClientLeft      =   2340
    ClientTop       =   1935
@@ -18,15 +18,15 @@ Begin VB.Form frmAbout
       AutoSize        =   -1  'True
       ClipControls    =   0   'False
       DragIcon        =   "frmAbout.frx":0000
-      Height          =   1980
+      Height          =   540
       Left            =   240
       Picture         =   "frmAbout.frx":1296A
-      ScaleHeight     =   1348.48
+      ScaleHeight     =   337.12
       ScaleMode       =   0  'User
-      ScaleWidth      =   1348.48
+      ScaleWidth      =   337.12
       TabIndex        =   1
       Top             =   240
-      Width           =   1980
+      Width           =   540
    End
    Begin VB.CommandButton cmdOK 
       Cancel          =   -1  'True
@@ -96,13 +96,13 @@ Begin VB.Form frmAbout
    End
    Begin VB.Label lblDisclaimer 
       AutoSize        =   -1  'True
-      Caption         =   "Warning: This product is protected by copyright laws 2016"
+      Caption         =   "Copyright 2018 Mobilize.Net"
       ForeColor       =   &H00000000&
       Height          =   195
       Left            =   255
       TabIndex        =   3
       Top             =   2625
-      Width           =   4110
+      Width           =   1980
    End
 End
 Attribute VB_Name = "frmAbout"

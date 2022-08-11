@@ -8,7 +8,6 @@ Begin VB.MDIForm frmMain
    ClientLeft      =   165
    ClientTop       =   810
    ClientWidth     =   16695
-   Icon            =   "frmMain.frx":0000
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
    WindowState     =   2  'Maximized
@@ -31,11 +30,11 @@ Begin VB.MDIForm frmMain
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   5
-            TextSave        =   "12:58 PM"
+            TextSave        =   "1:25 PM"
          EndProperty
          BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
-            TextSave        =   "8/24/2019"
+            TextSave        =   "2/21/2018"
          EndProperty
       EndProperty
    End

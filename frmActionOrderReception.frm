@@ -24,7 +24,7 @@ Begin VB.Form frmActionOrderReception
       Width           =   1575
    End
    Begin VB.CommandButton cmdApprove 
-      Caption         =   "&Add to Stock"
+      Caption         =   "&Add"
       Height          =   375
       Left            =   3480
       TabIndex        =   0
@@ -178,12 +178,12 @@ Begin VB.Form frmActionOrderReception
          NumPanels       =   1
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   13309
+            Object.Width           =   13785
          EndProperty
       EndProperty
    End
    Begin VB.CommandButton cmdCancel 
-      Caption         =   "&Cancel Order"
+      Caption         =   "&Cancel"
       Height          =   375
       Left            =   4920
       TabIndex        =   1
@@ -243,22 +243,25 @@ Begin VB.Form frmActionOrderReception
       End
    End
    Begin VB.Label Label7 
-      Caption         =   "Received by:"
+      Alignment       =   1  'Right Justify
+      Caption         =   "By:"
       Height          =   255
       Left            =   120
       TabIndex        =   34
       Top             =   960
-      Width           =   1095
+      Width           =   855
    End
    Begin VB.Label Label3 
+      Alignment       =   1  'Right Justify
       Caption         =   "Status:"
       Height          =   255
-      Left            =   4800
+      Left            =   4920
       TabIndex        =   32
       Top             =   120
       Width           =   735
    End
    Begin VB.Label Label19 
+      Alignment       =   1  'Right Justify
       Caption         =   "Received:"
       Height          =   255
       Left            =   120
@@ -267,36 +270,39 @@ Begin VB.Form frmActionOrderReception
       Width           =   855
    End
    Begin VB.Label lblChangedBy 
-      Caption         =   "Changed by:"
+      Alignment       =   1  'Right Justify
+      Caption         =   "By:"
       Height          =   255
       Left            =   4800
       TabIndex        =   28
       Top             =   960
-      Width           =   1335
+      Width           =   855
    End
    Begin VB.Label Label4 
+      Alignment       =   1  'Right Justify
       Caption         =   "Order Id:"
       Height          =   255
-      Left            =   180
+      Left            =   240
       TabIndex        =   27
       Top             =   120
       Width           =   735
    End
    Begin VB.Label lblChanged 
+      Alignment       =   1  'Right Justify
       Caption         =   "Changed:"
       Height          =   255
-      Left            =   4800
+      Left            =   4680
       TabIndex        =   26
       Top             =   540
-      Width           =   1335
+      Width           =   975
    End
    Begin VB.Label Label12 
-      Caption         =   "Freight Charge:"
+      Caption         =   "Freight:"
       Height          =   255
       Left            =   120
       TabIndex        =   22
       Top             =   6120
-      Width           =   1335
+      Width           =   855
    End
    Begin VB.Label Label11 
       Caption         =   "Total:"
@@ -364,13 +370,12 @@ If UCase(txtStatus) = "APPROVED" Then
 End If
 
 If UCase(txtStatus) = "CANCELLED" Then
-    LogStatus "Order was already approved by " & txtChangedBy & " on " & txtChanged & ", it cannot be approved", Me
+    LogStatus "Order was already approved by " & txtChangedBy & " on " & txtChanged & ", it cannot be cancelled", Me
     Exit Sub
 End If
 
-
 ' UPDATE
-ExecuteSql "Update OrderReceptions Set Status = 'APPROVED', ChangedBy = '" & UserId & "', ChangedDate = #" & Date & "#" & _
+ExecuteSql "Update OrderReceptions Set Status = 'APPROVED', ChangedBy = '" & UserId & "', ChangedDate = '" & Date & "'" & _
 " Where OrderId = " & OrderId
 
 ExecuteSql "Select ProductId, Quantity, UnitPrice, LineTotal " & _
@@ -381,29 +386,31 @@ While Not rs.EOF
 
     ExecuteSql2 "Insert Into Stocks " & _
     "(ProductID, Stock, InitialStock, DateStarted, DateModified, User, UnitPrice, StockPrice) Values " & _
-    "('" & rs("ProductId") & "'," & rs("Quantity") & "," & rs("Quantity") & ", #" & Date & "#, #" & Date & "#, '" & UserId & "', " & rs("UnitPrice") & "," & rs("LineTotal") & ")"
+    "('" & rs("ProductId") & "'," & rs("Quantity") & "," & rs("Quantity") & ", '" & Date & "', '" & Date & "', '" & UserId & "', " & rs("UnitPrice") & "," & rs("LineTotal") & ")"
     
     ExecuteSql2 "Select Max(StockID) as NewId From Stocks"
     Dim newId As Integer
     newId = rs2("NewId")
-
-    ExecuteSql2 "Insert Into StockLogs " & _
-    "(DocID, DocType, StockID, ProductId, Quantity, StockPrice, Date, User) Values " & _
-    "(" & rs("ProductId") & "," & rs("ProductId") & "," & "," & rs("ProductId") & "," & "," & rs("ProductId") & "," & "," & rs("ProductId") & "," & "," & rs("ProductId") & ",#" & Date & "#, '" & UserId & "')"
-
+    
+    ExecuteSql2 "Insert Into StockLog " & _
+    "(Date, DocID, DocType, ProductID, Quantity, StockID, StockPrice, User) Values " & _
+    "('" & Date & "','" & rs("ProductId") & "','" & rs("ProductId") & "','" & rs("ProductId") & "','" & rs("ProductId") & "','" & rs("Quantity") & "','" & rs("ProductID") & "','" & UserId & "')"
     rs.MoveNext
 Wend
 
-
 ExecuteSql "Insert Into Stocks " & _
 "(ProductID, Stock, InitialStock, DateStarted, DateModified, User, UnitPrice, StockPrice) " & _
-"Select ProductId, Quantity, Quantity, #" & Date & "#, #" & Date & "#, '" & UserId & "', UnitPrice, LineTotal " & _
+"Select ProductId, Quantity, Quantity, '" & Date & "', '" & Date & "', '" & UserId & "', UnitPrice, LineTotal " & _
 "From OrderReceptionDetails " & _
 "Where OrderID = " & OrderId
 
-ExecuteSql "Update Products as p Set UnitsInStock = UnitsInStock + " & _
-" ( Select Sum(Quantity) From OrderReceptionDetails Where OrderId = " & OrderId & " and ProductId = p.ProductId) " & _
-" Where ProductId in Select ProductId From OrderReceptionDetails Where OrderId = " & OrderId
+ExecuteSql "Update Products Set UnitsInStock = UnitsInStock + " & _
+" (Select Sum(Quantity) From OrderReceptionDetails Where OrderID = " & OrderId & " and ProductID = Products.ProductID) " & _
+" Where ProductId in (Select ProductID From OrderReceptionDetails Where OrderID = " & OrderId & ")"
+
+LoadData
+MsgBox "The order was successfully approved"
+Unload Me
 
 Exit Sub
 HandleError:
@@ -418,17 +425,16 @@ If UCase(txtStatus) = "CANCELLED" Then
     Exit Sub
 End If
 If UCase(txtStatus) = "APPROVED" Then
-    LogStatus "Order was already cancelled by " & txtChangedBy & " on " & txtChanged & ", it cannot be canceled", Me
+    LogStatus "Order was already cancelled by " & txtChangedBy & " on " & txtChanged & ", it cannot be approved", Me
     Exit Sub
 End If
-
 
 If MsgBox("Do you want to cancel the order reception?", vbYesNo + vbQuestion, "Confirm cancellation") <> vbYes Then
     Exit Sub
 End If
 
 ' UPDATE
-ExecuteSql "Update OrderReceptions Set Status = 'CANCELLED', ChangedBy = '" & UserId & "', ChangedDate = #" & Date & "#" & _
+ExecuteSql "Update OrderReceptions Set Status = 'CANCELLED', ChangedBy = '" & UserId & "', ChangedDate = '" & Date & "'" & _
 " Where OrderId = " & OrderId
 
 LoadData
@@ -515,14 +521,13 @@ txtTotalTax = Format(currentTotalTax, "#,##0.00")
 txtTotal = Format(currentTotal, "#,##0.00")
 End Sub
 
-
 Private Sub cmdClose_Click()
 Unload Me
 End Sub
 
 Private Sub LoadDetails()
 
-ExecuteSql "Select d.Quantity, p.ProductID, p.ProductName, d.UnitPrice, d.SalePrice, p.UnitsInStock, p.UnitsOnOrder, Str(p.QuantityPerUnit) + p.Unit, d.LineTotal From Products as p, OrderReceptionDetails as d " & _
+ExecuteSql "Select d.Quantity, p.ProductID, p.ProductName, d.UnitPrice, d.SalePrice, p.UnitsInStock, p.UnitsOnOrder, p.QuantityPerUnit + p.Unit, d.LineTotal From Products as p, OrderReceptionDetails as d " & _
  "Where d.OrderID = " & OrderId & " And d.ProductId = p.ProductId"
 
 Dim lng As Long

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "msadodc.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmProviders 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Suppliers"
@@ -27,7 +27,7 @@ Begin VB.Form frmProviders
       CommandTimeout  =   30
       CursorType      =   3
       LockType        =   3
-      CommandType     =   2
+      CommandType     =   1
       CursorOptions   =   0
       CacheSize       =   50
       MaxRecords      =   0
@@ -39,14 +39,14 @@ Begin VB.Form frmProviders
       ForeColor       =   -2147483640
       Orientation     =   0
       Enabled         =   -1
-      Connect         =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
-      OLEDBString     =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Orders.mdb;Persist Security Info=False"
+      Connect         =   "Driver=SQLite3 ODBC Driver; Database=Orders.db;"
+      OLEDBString     =   "Driver=SQLite3 ODBC Driver; Database=Orders.db;"
       OLEDBFile       =   ""
       DataSourceName  =   ""
       OtherAttributes =   ""
       UserName        =   ""
       Password        =   ""
-      RecordSource    =   "Providers"
+      RecordSource    =   "Select * from Providers"
       Caption         =   "Suppliers"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -257,7 +257,7 @@ Begin VB.Form frmProviders
          Width           =   1335
       End
       Begin VB.Label Label14 
-         Caption         =   "Country/Region"
+         Caption         =   "Country"
          Height          =   255
          Left            =   240
          TabIndex        =   23
@@ -265,7 +265,7 @@ Begin VB.Form frmProviders
          Width           =   1335
       End
       Begin VB.Label Label13 
-         Caption         =   "State or province:"
+         Caption         =   "State/Prov"
          Height          =   255
          Left            =   240
          TabIndex        =   22
@@ -289,7 +289,7 @@ Begin VB.Form frmProviders
          Width           =   1335
       End
       Begin VB.Label Label10 
-         Caption         =   "Fax number:"
+         Caption         =   "Fax"
          Height          =   255
          Left            =   3480
          TabIndex        =   19
@@ -297,7 +297,7 @@ Begin VB.Form frmProviders
          Width           =   1335
       End
       Begin VB.Label Label9 
-         Caption         =   "Extension:"
+         Caption         =   "Ext"
          Height          =   255
          Left            =   3480
          TabIndex        =   18
@@ -305,7 +305,7 @@ Begin VB.Form frmProviders
          Width           =   1335
       End
       Begin VB.Label Label8 
-         Caption         =   "Phone number:"
+         Caption         =   "Phone"
          Height          =   255
          Left            =   3480
          TabIndex        =   17
@@ -321,7 +321,7 @@ Begin VB.Form frmProviders
          Width           =   1335
       End
       Begin VB.Label Label1 
-         Caption         =   "Supplier Name:"
+         Caption         =   "Name"
          Height          =   255
          Left            =   240
          TabIndex        =   15
@@ -340,7 +340,7 @@ Begin VB.Form frmProviders
       MaskColor       =   16777215
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   5
+         NumListImages   =   6
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmProviders.frx":0000
             Key             =   ""
@@ -359,6 +359,10 @@ Begin VB.Form frmProviders
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmProviders.frx":0D48
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmProviders.frx":109A
             Key             =   ""
          EndProperty
       EndProperty
@@ -407,6 +411,7 @@ Begin VB.Form frmProviders
          BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "Cancel"
             Object.ToolTipText     =   "Cancel edited changes"
+            ImageIndex      =   6
          EndProperty
       EndProperty
    End
@@ -495,6 +500,7 @@ If TextBoxEmpty(txtField(11)) Then Exit Sub
 If TextBoxEmpty(txtField(12)) Then Exit Sub
 If TextBoxEmpty(txtField(14)) Then Exit Sub
 dcProviders.Recordset.Update
+dcProviders.Recordset.Requery
 EditMode = False
 NewMode = False
 End Sub
