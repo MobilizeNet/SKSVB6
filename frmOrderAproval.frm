@@ -372,7 +372,7 @@ If chkTo.value = 1 Then
 End If
 If cmbStatus.ListIndex <> -1 And cmbStatus.text <> "All" Then
     AppendAND filter
-    filter = filter & "o.Status = '" & cmbStatus.text & "'"
+    filter = filter & "o.Status = '" & Strings.UCase(cmbStatus.text) & "'"
 End If
 
 Dim where As String
