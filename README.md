@@ -65,7 +65,7 @@ This application was developed in VB6, it uses mostly the intrinsic VB6 controls
     - MSComCtlLib.Toolbar
     - MSFlexGridLib.MSFlexGrid
 
-The database used is an **MS Access** Database called `Orders.mdb`
+The database used is an **SQLite** Database called `Orders.db`
 
-It uses *ADODB* to connect to this MDB and also the ADO Data Controls for databinding and data navigation.
+It uses *SQLite* to connect to this DB and also the ADO Data Controls for databinding and data navigation.
 
