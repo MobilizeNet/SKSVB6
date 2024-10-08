@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmActionOrderReception 
    BorderStyle     =   1  'Fixed Single
@@ -414,7 +414,7 @@ Unload Me
 
 Exit Sub
 HandleError:
-MsgBox "An error has occurred adding the data. Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
+MsgBox "An error has occurred adding the data." & vbCrLf & "Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
 
 End Sub
 
@@ -443,7 +443,7 @@ Unload Me
 
 Exit Sub
 HandleError:
-MsgBox "An error has occurred adding the data. Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
+MsgBox "An error has occurred adding the data." & vbCrLf & "Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
 
 End Sub
 

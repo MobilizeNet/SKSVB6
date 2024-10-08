@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmOrderRequest 
@@ -113,7 +113,7 @@ Begin VB.Form frmOrderRequest
       _ExtentX        =   2566
       _ExtentY        =   529
       _Version        =   393216
-      Format          =   228196353
+      Format          =   95748097
       CurrentDate     =   41323
    End
    Begin VB.CommandButton cmdSave 
@@ -312,7 +312,7 @@ Begin VB.Form frmOrderRequest
       _ExtentX        =   2566
       _ExtentY        =   529
       _Version        =   393216
-      Format          =   228524033
+      Format          =   95748097
       CurrentDate     =   41323
    End
    Begin VB.Label Label13 
@@ -519,7 +519,7 @@ Else
 End If
 Exit Sub
 HandleError:
-MsgBox "An error has occurred adding the data. Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
+MsgBox "An error has occurred adding the data." & vbCrLf & "Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
 End Sub
 
 Private Sub dtPromised_Change()

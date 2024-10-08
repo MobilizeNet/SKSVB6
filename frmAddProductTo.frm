@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmAddProductTo 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Create New Product Item"
@@ -310,7 +310,7 @@ MsgBox "Data was succesfully saved", vbOKOnly + vbInformation, "New data"
 Unload Me
 Exit Sub
 HandleError:
-MsgBox "An error has occurred adding the data. Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
+MsgBox "An error has occurred adding the data." & vbCrLf & "Error: (" & err.Number & ") " & err.Description, vbCritical, "Error"
 End Sub
 
 Public Sub LoadData()
